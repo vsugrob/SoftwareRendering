@@ -1,0 +1,6 @@
+.vs/
+bin/
+obj/
+TextureFilteringDev/Cache/
+TestResults/
+TextureFilteringDev/Screenshots/

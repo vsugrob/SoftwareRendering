@@ -1,0 +1,117 @@
+﻿<Window x:Class="TextureFilteringDev.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:l="clr-namespace:TextureFilteringDev"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:colorchips="clr-namespace:ColorPickerControls.Chips;assembly=ColorPickerControls"
+        xmlns:common3d="clr-namespace:Common3d;assembly=Common3d"
+        Loaded="Window_Loaded"
+        Background="Gray"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        MouseLeftButtonUp="Window_MouseLeftButtonUp"
+        MouseMove="Window_MouseMove"
+        MouseWheel="Window_MouseWheel"
+        KeyDown="Window_KeyDown"
+        Title="MainWindow" Height="517" Width="862">
+    <Window.Resources>
+        <l:EnumMembersConverter x:Key="EnumMembersConverter" />
+    </Window.Resources>
+    <Grid>
+        <DockPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" TextBlock.Foreground="White">
+                <TextBlock Text="Filtering: " Margin="2" />
+                <ComboBox Name="FilteringTypeComboBox"
+                          Margin="0,0,10,0"
+                          ItemsSource="{Binding Source={x:Type common3d:FilteringType}, Converter={StaticResource EnumMembersConverter}}"
+                          SelectionChanged="FilteringTypeComboBox_SelectionChanged"/>
+                <TextBlock Text="Wrap mode: " Margin="2" />
+                <ComboBox Name="WrapModeComboBox"
+                          Margin="0,0,10,0"
+                          ItemsSource="{Binding Source={x:Type common3d:TextureWrap}, Converter={StaticResource EnumMembersConverter}}"
+                          SelectionChanged="WrapModeComboBox_SelectionChanged"/>
+                <TextBlock Text="Culling: " Margin="2" />
+                <ComboBox Name="CullingComboBox"
+                          Margin="0,0,10,0"
+                          ItemsSource="{Binding Source={x:Type l:Culling}, Converter={StaticResource EnumMembersConverter}}"
+                          SelectionChanged="CullingComboBox_SelectionChanged"/>
+                <Button Name="ResetCameraButton"
+                        Margin="0,0,10,0"
+                        Click="ResetCameraButton_Click"
+                        Padding="10,0,10,0">Reset Camera</Button>
+                <colorchips:ColorChip Name="ClearColorPicker"
+                                      Margin="0,0,10,0"
+                                      ToolTip="Clear color"
+                                      Color="White"
+                                      Width="24" Height="20"
+                                      BorderThickness="0"
+                                      ColorChanged="ClearColorPicker_ColorChanged" />
+                <colorchips:ColorChip Name="BorderColorPicker"
+                                      Margin="0,0,10,0"
+                                      ToolTip="Border color"
+                                      Color="Green"
+                                      Width="24" Height="20"
+                                      BorderThickness="0"
+                                      ColorChanged="BorderColorPicker_ColorChanged" />
+                <CheckBox Name="ShowLodsCheckBox"
+                          Margin="0,0,10,0"
+                          Foreground="White"
+                          VerticalAlignment="Center"
+                          Checked="ShowLodsCheckBox_Checked"
+                          Unchecked="ShowLodsCheckBox_Unchecked">Show lods</CheckBox>
+                <CheckBox Name="UseMipMapsCheckBox"
+                          Margin="0,0,10,0"
+                          Foreground="White"
+                          VerticalAlignment="Center"
+                          IsChecked="True"
+                          Checked="UseMipMapsCheckBox_Checked"
+                          Unchecked="UseMipMapsCheckBox_Unchecked">Use mipmaps</CheckBox>
+                <Button Name="ScreenshotButton"
+                        Margin="0,0,10,0"
+                        Padding="10,0,10,0"
+                        Click="ScreenshotButton_Click">Screenshot</Button>
+            </StackPanel>
+            
+            <ListBox Name="TexturesListBox"
+                     DockPanel.Dock="Bottom"
+                     HorizontalAlignment="Center"
+                     ItemsSource="{Binding Path=Textures, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                     Background="Gray"
+                     SelectionChanged="TexturesListBox_SelectionChanged">
+                <ListBox.Resources>
+                    <DataTemplate DataType="{x:Type l:TextureEntry}">
+                        <DataTemplate.Resources>
+                            <sys:Double x:Key="MaxWidth">150</sys:Double>
+                        </DataTemplate.Resources>
+                        <StackPanel Margin="5">
+                            <Image Source="{Binding Path=Path}"
+                                   Name="Texture"
+                                   MaxWidth="{StaticResource MaxWidth}"
+                                   MaxHeight="100" />
+                            <TextBlock Text="{Binding Path=Name}"
+                                       Foreground="Orange"
+                                       MaxWidth="{StaticResource MaxWidth}" />
+                            <TextBlock MaxWidth="{StaticResource MaxWidth}"
+                                       HorizontalAlignment="Center">
+                                <Run Text="{Binding ElementName=Texture, Path=Source.PixelWidth, Mode=OneWay}" />
+                                <Run Text="x" />
+                                <Run Text="{Binding ElementName=Texture, Path=Source.PixelHeight, Mode=OneWay}" />
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.Resources>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+            <Grid Name="RenderedImageUnderlay"
+                  Background="#aaa"
+                  SizeChanged="RenderedImageUnderlay_SizeChanged">
+                <Image Name="RenderedImage" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       UseLayoutRounding="True"
+                       RenderOptions.BitmapScalingMode="NearestNeighbor" />
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>

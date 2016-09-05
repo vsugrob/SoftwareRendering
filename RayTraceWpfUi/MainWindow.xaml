@@ -1,0 +1,18 @@
+﻿<Window x:Class="RayTraceWpfUi.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525"
+        Loaded="Window_Loaded" Background="Gray">
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="1">
+            <Button Name="Render400x300" Click="Render400x300_Click" Margin="1">Render 400x300</Button>
+            <Button Name="Render1920x1080" Click="Render1920x1080_Click" Margin="1">Render 1920x1080</Button>
+            <TextBlock Foreground="White" Margin="1" VerticalAlignment="Center">
+                <Run Text="Render Time:" />
+                <Run Name="RenderTime" />
+            </TextBlock>
+        </StackPanel>
+        
+        <Image Name="RenderedImage" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    </DockPanel>
+</Window>

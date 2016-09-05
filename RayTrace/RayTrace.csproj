@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FFDFE648-21D4-4E85-9C8E-F26E833F7772}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RayTrace</RootNamespace>
+    <AssemblyName>RayTrace</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CheckerMaterial.cs" />
+    <Compile Include="MappedMaterial.cs" />
+    <Compile Include="RayTracer.cs" />
+    <Compile Include="SectionRayTracer.cs" />
+    <Compile Include="RefractiveDispersiveMaterial.cs" />
+    <Compile Include="Light.cs" />
+    <Compile Include="RefractionIndex.cs" />
+    <Compile Include="RefractiveMaterial.cs" />
+    <Compile Include="CsgObject.cs" />
+    <Compile Include="PhongEnvironmentMaterial.cs" />
+    <Compile Include="EyeBasedRayTracer.cs" />
+    <Compile Include="PhongMaterial.cs" />
+    <Compile Include="PlanarSurface.cs" />
+    <Compile Include="ReflectiveMaterial.cs" />
+    <Compile Include="Sphere.cs" />
+    <Compile Include="SpotLight.cs" />
+    <Compile Include="Traceable.cs" />
+    <Compile Include="Material.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IntersectData.cs" />
+    <Compile Include="Scene.cs" />
+    <Compile Include="TraceData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common3d\Common3d.csproj">
+      <Project>{6DF1DC68-5AB2-4858-B3B9-DD5D92194490}</Project>
+      <Name>Common3d</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Math3\Math3.csproj">
+      <Project>{6720ABFC-AAAC-4944-AD8B-CD9C5203C38D}</Project>
+      <Name>Math3</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
