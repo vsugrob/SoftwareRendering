@@ -7,7 +7,7 @@ via triangle rasterization and ray-tracing techniques.
 ### Triangle rasterization ###
 Open `SoftwareRendering.sln`, set `TextureFilteringDev.csproj` as the StartUp project.
 
-*Example of image produced by ray-tracer:*
+*Example of image produced by triangle rasterizer:*
 
 ![Triangle rasterization](Doc/Images/triangle-rasterization.jpg)
 
